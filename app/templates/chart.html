@@ -1,0 +1,72 @@
+
+{% from "_render_field.html" import render_field %}
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1>Population by Nation</h1><br>
+    data from 
+    <a href="https://data.world/nrippner/population-by-country1980-2010">data.world</a>
+    <br><br>
+    Created with Flask and chartist.js
+
+    <span class='nation' value='nation'></span>
+
+
+    <fieldset>
+      <legend>FORM</legend>
+    {{ render_field(form.nation) }}
+      
+
+    <div class="ct-chart ct-perfect-fourth">
+        
+    </div>
+    <script>
+    var mychart;
+
+    var nation = $("#nation option:selected").text()
+    var getData = $.get('/data/'.concat(nation));
+
+    getData.done(function(results){
+
+      var data = {
+        labels: results.labels,
+        series: [
+          results.results
+          ]
+      };
+
+      mychart = new Chartist.Line('.ct-chart', data);
+
+    })
+
+    function updateChart(){
+      var nation = $("#nation option:selected").text()
+
+      var updatedData = $.get('/data/'.concat(nation));
+
+      updatedData.done(function(results){
+      var data = {
+        labels: results.labels,
+        series: [
+          results.results
+          ]
+      };
+
+      mychart.update(data)
+      });
+
+    }
+
+    $('#update').on('click', updateChart)
+    $('#nation').on('change', updateChart)
+    </script>
+
+  </body>
+</html>
