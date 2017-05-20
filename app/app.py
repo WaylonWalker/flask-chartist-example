@@ -37,4 +37,5 @@ def data(nation):
     return jsonify({'results':df2[nation].astype(float).tolist(), 'labels':df2.index.astype(float).tolist()})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
