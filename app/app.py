@@ -33,7 +33,7 @@ def index():
 
 @app.route('/data/<string:nation>')
 def data(nation):
-    data =  '{' + f'labels:{df2.index.astype(int).tolist()}, series: {df2[nation].astype(float).tolist()}' + '}'
+    data =  '{' + 'labels:{}, series: {}'.format(df2.index.astype(int).tolist(), df2[nation].astype(float).tolist()) + '}'
     return jsonify({'results':df2[nation].astype(float).tolist(), 'labels':df2.index.astype(float).tolist()})
 
 if __name__ == '__main__':
