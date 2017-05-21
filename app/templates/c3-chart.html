@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Simple chart with C3 - in 5 minutes! </title>
+  
+  <!-- Here are all the javascripts and css that you need, you can download them or linked them like here -->
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/c3/0.1.29/c3.js"></script>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/c3/0.1.29/c3.css" rel="stylesheet" type="text/css">
+  
+</head>
+<body>
+
+<!-- You need an element with an id called "chart" to set a place where your chart will render-->
+<div id="chart"></div>
+  
+<script type="text/javascript">
+  var chart = c3.generate({
+    data: {
+        columns: [
+            ['Lulu', 50],
+            ['Olaf', 50],
+        ],
+        type : 'donut'
+    },
+    donut: {
+        title: "Dogs love:",
+    }
+});
+  
+</script>
+</body>
+</html>

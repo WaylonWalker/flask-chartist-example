@@ -6,6 +6,8 @@ from flask import Flask, render_template, g, jsonify, request, redirect
 import pandas as pd
 import settings
 from random import choice
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import rcParams
 
