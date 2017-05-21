@@ -1,0 +1,21 @@
+
+{% from "_render_field.html" import render_field %}
+
+<h1>Population by Nation</h1><br>
+data from 
+<a href="https://data.world/nrippner/population-by-country1980-2010">data.world</a>
+<br><br>
+Created with Flask and matplotlib
+
+<span class='nation' value='nation'></span>
+
+
+<fieldset>
+  <legend>World Population</legend>
+{{ render_field(form.nation) }}
+  
+
+<img src="" name="population">
+
+    
+</div>
