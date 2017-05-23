@@ -7,5 +7,5 @@ function updateChartSrc(){
 }
 
 
-
+$( document ).ready(updateChartSrc)
 $("#nation").on('change', updateChartSrc);

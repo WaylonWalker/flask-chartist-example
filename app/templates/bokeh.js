@@ -11,9 +11,9 @@ console.log('updated div/scripts')
 
   });
 
-  console.log('updated div/scripts')
 
 }
 
+$( document ).ready(updateChart)
 $('#update').on('click', updateChart)
 $('#nation').on('change', updateChart)
