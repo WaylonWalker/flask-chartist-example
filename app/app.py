@@ -14,6 +14,8 @@ from matplotlib.pyplot import rcParams
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField
 
+from bokeh.plotting import figure
+from bokeh.embed import components
 
 df = pd.read_csv(os.path.join(settings.data_dir, 'pop_by_country_long_form.csv'))
 df['Year'] = df['Year'].str[4:].astype(int)
@@ -85,6 +87,14 @@ def matplotlib_plot():
     scripts = render_template('matplotlib.js')
     return render_template('home.html',head_scripts=head_scripts, body=body, scripts=scripts)
 
+@app.route('/bokeh', methods=['GET', 'POST'])
+def bokeh_plot():
+    form = MyForm()
+    head_scripts = render_template('bokeh_head_scripts.html')
+    body = render_template('bokeh.html', form=form)
+    scripts = render_template('bokeh.js')
+    return render_template('home.html',head_scripts=head_scripts, body=body, scripts=scripts)
+
 @app.route('/chartist', methods=['GET', 'POST'])
 def chartist():
     form = MyForm()
@@ -111,6 +121,14 @@ def mpl(nation):
     hide_spines(ax)
     return jsonify({'src': fig_to_html(ax.figure)})
 
+@app.route('/pybokeh/<string:nation>')
+def pybokeh(nation):
+    p = figure(title=nation, logo=None, tools="box_zoom,pan,wheel_zoom,reset",)
+    p.line(x=df2[nation].index, y=df2[nation].values)
+    script, div = components(p)
+    return jsonify({'script': script,
+                   'div': div})
+
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(debug=True, host='0.0.0.0', port=port)

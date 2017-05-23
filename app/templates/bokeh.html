@@ -1,0 +1,22 @@
+{% from "_render_field.html" import render_field %}
+
+<h1>Population by Nation</h1><br>
+data from 
+<a href="https://data.world/nrippner/population-by-country1980-2010">data.world</a>
+<br><br>
+Created with Flask and python bokeh.  
+Using the pure python causes the whole chart to be refreshed.  
+It would be possible to update the data only to avoid the chart completely redrawing on update.
+
+<span class='nation' value='nation'></span>
+
+
+<fieldset>
+  <legend>World Population</legend>
+{{ render_field(form.nation) }}
+  
+
+<div id="bokeh-pop-plot"></div>
+<div id="bokeh-pop-script"></div>
+    
+</div>
