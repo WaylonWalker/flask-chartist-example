@@ -1,6 +1,9 @@
 # flask-chartist-example
 Learning more about flask and javascript
 
+This app is currently running on [heroku](http://still-beyond-87368.herokuapp.com/chartist)
+
+
 This project will create a flask dashboard with a javascript library, and the charts will update without refreshing the page.  The charts will not be polished or excitin, this is just to explore how to create a working dashboard in python with minimal javascript to refresh the data.
 
 ## Inspiration
