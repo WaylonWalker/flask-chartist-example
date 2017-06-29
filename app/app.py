@@ -103,6 +103,14 @@ def chartist():
     scripts = render_template('chartist.js')
     return render_template('home.html', head_scripts=head_scripts, body=body, scripts=scripts)
 
+@app.route('/c3', methods=['GET', 'POST'])
+def c3_route():
+    form = MyForm()
+    head_scripts = render_template('c3_head_scripts.html')
+    body = render_template('c3.html', form=form)
+    scripts = render_template('c3_update.js')
+    return render_template('home.html', head_scripts=head_scripts, body=body, scripts=scripts)
+
 @app.route('/chartist1', methods=['GET', 'POST'])
 def chartist1():
     form = MyForm()
@@ -129,6 +137,15 @@ def pybokeh(nation):
     return jsonify({'script': script,
                    'div': div})
 
+@app.route('/c3data/<string:nation>')
+def c3_daata_route(nation):
+
+    data = {'columns':[[nation] + df2[nation].astype(float).tolist(), ['x'] + df2.index.astype(float).tolist()],
+    'colors': {nation: '#4286f4'},
+    'unload': "",}
+    return jsonify(data)
+
+
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, debug=True)
