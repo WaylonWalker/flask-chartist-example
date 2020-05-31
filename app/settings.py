@@ -9,9 +9,6 @@ try:
     root_dir = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
 except NameError:
     root_dir = os.path.abspath(os.path.dirname(_dh[0]))
-except NameError:
-    root_dir = os.path.abspath(os.path.dirname(os.getcwd))
-
 reports_dir = os.path.join(root_dir, 'reports')
 data_dir = os.path.join(root_dir, 'data')
 raw_data_dir = os.path.join(root_dir, 'data', 'raw')
